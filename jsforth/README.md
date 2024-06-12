@@ -1,5 +1,6 @@
 # TODO
 
+- [ ] Mobile text prompt pushing form up and breaking visual UI
 - [X] Add web interface (don't print stack contents on prompt by default, require .S)
 - [ ] Compiling words to dictionary
 - [ ] ." " printing word

@@ -54,6 +54,7 @@ module.exports = class Forth {
 		});
 
 		this.defineWord('.', function() {
+			// TODO: may need to change this for web interface
 			console.log(this.pop());
 		});
 

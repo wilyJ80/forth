@@ -91,6 +91,11 @@ module.exports = class Forth {
 			this.push(c);
 			this.push(a);
 		});
+
+		this.defineWord('words', () => {
+			// TODO: may need to change this for web interface
+			console.log(Object.keys(this.dictionary));
+		});
 	};
 
 	evaluate = (input) => {

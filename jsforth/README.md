@@ -7,7 +7,7 @@
 - [ ] MOD and /MOD
 - [ ] Organizing the code?
 - [ ] Pair stack operations
-- [ ] WORDS
+- [x] WORDS
 - [ ] FORGET
 - [ ] BYE
 - [ ] Text editing / uploading / downloading?

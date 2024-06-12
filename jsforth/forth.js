@@ -5,22 +5,22 @@ module.exports = class Forth {
 		this.dictionary = {};
 	}
 
-	push = function(value) {
+	push = (value) => {
 		this.dataStack.push(value);
 	};
 
-	pop = function() {
+	pop = () => {
 		if (this.dataStack.length === 0) {
 			throw new Error("Stack underflow");
 		}
 		return this.dataStack.pop();
 	};
 
-	defineWord = function(name, func) {
+	defineWord = (name, func) => {
 		this.dictionary[name] = func;
 	};
 
-	executeWord = function(name) {
+	executeWord = (name) => {
 		if (name in this.dictionary) {
 			this.dictionary[name].call(this);
 		} else {
@@ -28,54 +28,54 @@ module.exports = class Forth {
 		}
 	};
 
-	initCoreWords = function() {
-		this.defineWord('+', function() {
+	initCoreWords = () => {
+		this.defineWord('+', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a + b);
 		});
 
-		this.defineWord('-', function() {
+		this.defineWord('-', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a - b);
 		});
 
-		this.defineWord('*', function() {
+		this.defineWord('*', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a * b);
 		});
 
-		this.defineWord('/', function() {
+		this.defineWord('/', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a / b);
 		});
 
-		this.defineWord('.', function() {
+		this.defineWord('.', () => {
 			// TODO: may need to change this for web interface
 			console.log(this.pop());
 		});
 
-		this.defineWord('drop', function() {
+		this.defineWord('drop', () => {
 			this.pop();
 		});
 
-		this.defineWord('dup', function() {
+		this.defineWord('dup', () => {
 			const a = this.pop();
 			this.push(a);
 			this.push(a);
 		});
 
-		this.defineWord('swap', function() {
+		this.defineWord('swap', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(b);
 			this.push(a);
 		});
 
-		this.defineWord('over', function() {
+		this.defineWord('over', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(b);
@@ -83,7 +83,7 @@ module.exports = class Forth {
 			this.push(b);
 		});
 
-		this.defineWord('rot', function() {
+		this.defineWord('rot', () => {
 			const c = this.pop();
 			const b = this.pop();
 			const a = this.pop();
@@ -93,7 +93,7 @@ module.exports = class Forth {
 		});
 	};
 
-	evaluate = function(input) {
+	evaluate = (input) => {
 		const tokens = input.split(/\s+/).filter(token => token.length > 0);
 		for (const token of tokens) {
 			if (!isNaN(token)) {

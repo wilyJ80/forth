@@ -56,6 +56,40 @@ module.exports = class Forth {
 		this.defineWord('.', function() {
 			console.log(this.pop());
 		});
+
+		this.defineWord('drop', function() {
+			this.pop();
+		});
+
+		this.defineWord('dup', function() {
+			const a = this.pop();
+			this.push(a);
+			this.push(a);
+		});
+
+		this.defineWord('swap', function() {
+			const b = this.pop();
+			const a = this.pop();
+			this.push(b);
+			this.push(a);
+		});
+
+		this.defineWord('over', function() {
+			const b = this.pop();
+			const a = this.pop();
+			this.push(b);
+			this.push(a);
+			this.push(b);
+		});
+
+		this.defineWord('rot', function() {
+			const c = this.pop();
+			const b = this.pop();
+			const a = this.pop();
+			this.push(b);
+			this.push(c);
+			this.push(a);
+		});
 	};
 
 	evaluate = function(input) {

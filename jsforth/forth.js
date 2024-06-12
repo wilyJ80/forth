@@ -1,4 +1,4 @@
-module.exports = class Forth {
+export class Forth {
 	constructor() {
 		this.dataStack = [];
 		this.returnStack = [];
@@ -22,7 +22,7 @@ module.exports = class Forth {
 
 	executeWord = (name) => {
 		if (name in this.dictionary) {
-			this.dictionary[name].call(this);
+			return this.dictionary[name].call(this);
 		} else {
 			throw new Error(`Undefined word: ${name}`);
 		}
@@ -33,39 +33,46 @@ module.exports = class Forth {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a + b);
+			return this.dataStack;
 		});
 
 		this.defineWord('-', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a - b);
+			return this.dataStack;
 		});
 
 		this.defineWord('*', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a * b);
+			return this.dataStack;
 		});
 
 		this.defineWord('/', () => {
 			const b = this.pop();
 			const a = this.pop();
 			this.push(a / b);
+			return this.dataStack;
 		});
 
 		this.defineWord('.', () => {
 			// TODO: may need to change this for web interface
-			console.log(this.pop());
+			const top = this.pop();
+			return top;
 		});
 
 		this.defineWord('drop', () => {
 			this.pop();
+			return this.dataStack;
 		});
 
 		this.defineWord('dup', () => {
 			const a = this.pop();
 			this.push(a);
 			this.push(a);
+			return this.dataStack;
 		});
 
 		this.defineWord('swap', () => {
@@ -73,6 +80,7 @@ module.exports = class Forth {
 			const a = this.pop();
 			this.push(b);
 			this.push(a);
+			return this.dataStack;
 		});
 
 		this.defineWord('over', () => {
@@ -81,6 +89,7 @@ module.exports = class Forth {
 			this.push(b);
 			this.push(a);
 			this.push(b);
+			return this.dataStack;
 		});
 
 		this.defineWord('rot', () => {
@@ -90,22 +99,33 @@ module.exports = class Forth {
 			this.push(b);
 			this.push(c);
 			this.push(a);
+			return this.dataStack;
 		});
 
 		this.defineWord('words', () => {
 			// TODO: may need to change this for web interface
-			console.log(Object.keys(this.dictionary));
+			return Object.keys(this.dictionary);
 		});
+
+		this.defineWord('.S', () => {
+			return this.dataStack;
+		})
 	};
 
 	evaluate = (input) => {
 		const tokens = input.split(/\s+/).filter(token => token.length > 0);
+		let result = [];
 		for (const token of tokens) {
 			if (!isNaN(token)) {
 				this.push(parseFloat(token));
 			} else {
-				this.executeWord(token);
+				result.push(this.executeWord(token));
 			}
+		}
+		if (result.length > 0) {
+			return result;
+		} else {
+			return this.dataStack;
 		}
 	};
 }

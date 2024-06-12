@@ -1,9 +1,9 @@
 # TODO
 
-- [ ] Add web interface (don't print stack contents on prompt by default, require .S)
+- [X] Add web interface (don't print stack contents on prompt by default, require .S)
 - [ ] Compiling words to dictionary
 - [ ] ." " printing word
-- [ ] .S print stack word
+- [X] .S print stack word
 - [ ] MOD and /MOD
 - [ ] Organizing the code?
 - [ ] Pair stack operations

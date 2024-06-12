@@ -6,13 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link href="css/output.css" rel="stylesheet">
+	<script type="module" src="script.js" defer></script>
+	<script type="module" src="forth.js"></script>
 </head>
 
 <body class="h-screen flex justify-center bg-primary-content">
 
-	<div class="card card-compact w-80 bg-base-100 shadow-xl h-1/2">
-		<div class="mockup-code bg-primary text-primary-content">
-			<pre id="output" class="h-64 overflow-y-auto"><code> ok></code></pre>
+	<div class="card card-compact w-80 bg-base-100 shadow-xl h-1/2 ">
+		<div class="mockup-code bg-primary text-primary-content p-3">
+			<pre class="h-64 overflow-y-auto break-words whitespace-normal">Help: Type "words"
+				<code id="output"></code>
+			</pre>
 		</div>
 		<div class="card-body">
 			<div class="card-actions justify-center">

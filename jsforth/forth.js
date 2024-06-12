@@ -103,9 +103,3 @@ module.exports = class Forth {
 		}
 	};
 }
-
-// const forth = new Forth();
-// forth.initCoreWords();
-//
-// forth.evaluate('3 4 + .');
-
